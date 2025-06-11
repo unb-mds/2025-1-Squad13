@@ -7,10 +7,12 @@ from speechbrain.inference import SpeakerRecognition
 import torch
 from datetime import datetime
 import warnings
+import migration
+import io
 warnings.filterwarnings("ignore", category=FutureWarning)
 
-testingVoice = "testingVoice.wav"
-secretVoice = "secretVoice.wav"
+# testingVoice = "testingVoice.wav"
+# secretVoice = "secretVoice.wav"
 
 #Recording function
 def recording(filename):
@@ -30,8 +32,8 @@ def recording(filename):
     frames = []
 
     print(f"Recording duration: {recordingDuration}s")
-    if(filename == "testingVoice.wav"): print("Testing voice recording")
-    elif(filename == "secretVoice.wav"): print("Secret voice recording")
+    # if(filename == "testingVoice.wav"): print("Testing voice recording")
+    # elif(filename == "secretVoice.wav"): print("Secret voice recording")
 
     aux = 0
     for i in range(0, int(rate / 1024 * recordingDuration)):
@@ -46,22 +48,32 @@ def recording(filename):
     stream.stop_stream()
     stream.close()
     p.terminate()
-    with wave.open(filename, 'wb') as wf:
+    
+    buffer = io.BytesIO()
+    with wave.open(buffer, 'wb') as wf:
         wf.setnchannels(channel)
         wf.setsampwidth(p.get_sample_size(format))
         wf.setframerate(rate)
         wf.writeframes(b''.join(frames))
+    #audioIput = buffer.getvalue()
+    return buffer
+    
 
-#Check if secret .wav recording exists
-arquivo = Path("secretVoice.wav")
-if(not arquivo.exists() and not arquivo.is_file()):
-    recording(secretVoice)
+# #Check if secret .wav recording exists
+# arquivo = Path("secretVoice.wav")
+# if(not arquivo.exists() and not arquivo.is_file()):
+#     recording(secretVoice)
 
-recording(testingVoice)
+# recording(testingVoice)
 
 #Extract embedding from a .wav audio
 def extract_embedding(verification, file_path):
-    signal = verification.load_audio(file_path)
+    #signal = verification.load_audio(file_path)
+
+    #transforma a variavel em uma tupla, associando waveform com o tensor do audio e sample_rate com a taxa em hz
+    #deve funcionar do msm jeito mas agora sem precisar criar um arquivo com o audio
+    waveform, sample_rate = torchaudio.load(file_path)
+    signal = waveform
     signal = signal.unsqueeze(0)
     lengths = torch.tensor([1.0])
 
@@ -72,30 +84,51 @@ verification = SpeakerRecognition.from_hparams(
                         source="pretrained_models/spkrec",
                         savedir="pretrained_models/spkrec")
 
-#Secret embedding
-embedding_path = Path("embeddings/secret_embedding.pt")
-if not embedding_path.exists():
-    secret_embedding = extract_embedding(verification, secretVoice)
+# #Secret embedding
+# embedding_path = Path("embeddings/secret_embedding.pt")
+# if not embedding_path.exists():
+#     secret_embedding = extract_embedding(verification, secretVoice)
 
-    embedding_path.parent.mkdir(parents=True, exist_ok=True)
+#     embedding_path.parent.mkdir(parents=True, exist_ok=True)
 
-    torch.save(secret_embedding, embedding_path)
-else:
-    secret_embedding = torch.load(embedding_path)
+#     torch.save(secret_embedding, embedding_path)
+# else:
+#     secret_embedding = torch.load(embedding_path)
 
-#Testing voice embedding
-testing_embedding = extract_embedding(verification, testingVoice)
+# #Testing voice embedding
+# testing_embedding = extract_embedding(verification, testingVoice)
 
-#Verification
-score = verification.similarity(testing_embedding, secret_embedding)
+def verify_voice(verification, userEmail):
+    newVoice = recording("dá pra tirar o file name eu acho")
+    newVoice = extract_embedding(verification, newVoice)
+    
+    #pega uma serie de vozes desse usuario do banco de dados
+    secretVoices = migration.autentication(userEmail)
+    
+    #acho q o ideal seria pegar uma media de todos os scores
+    score = 0
+    for v in secretVoices:
+        score += verification.similarity(newVoice, v.voice_module)
+    score = score/len(secretVoices)
+    similarity(score)
+
+def new_secret_voice(verification, userEmail):
+   newVoice = recording("dá pra tirar o file name eu acho")
+   extract_embedding(verification, newVoice)
+   #salva la no banco de dados
+   migration.add_new_voice(newVoice, userEmail)
+    
+
+# #Verification
+# score = verification.similarity(testing_embedding, secret_embedding)
 
 def similarity(score):
     prediction = score > -1.75
-    print(f"Score: {score}, Match: {prediction}")
+    print(f"Score: {score}, Match: {prediction}\n")
 
     if(prediction):
-        print("\nValid authentication")
+        print("Valid authentication")
     else:
-        print("\nInvalid voice")
+        print("Invalid voice")
 
-similarity(score)
+# similarity(score)
