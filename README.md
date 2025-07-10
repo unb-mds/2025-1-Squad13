@@ -61,10 +61,9 @@ O **VIDA** é uma plataforma inovadora de autenticação biométrica baseada em 
 
 ### Backend
 
-- **Python 3.13+** - Linguagem principal
+- **Python 3.12** - Linguagem principal
 - **FastAPI** - Framework web moderno e rápido
 - **SpeechBrain** - Biblioteca de ML para processamento de áudio
-- **PyTorch** - Framework de Deep Learning
 - **PostgreSQL** - Banco de dados relacional
 
 ### DevOps & Infraestrutura
@@ -78,7 +77,6 @@ O **VIDA** é uma plataforma inovadora de autenticação biométrica baseada em 
 
 - **TorchAudio** - Processamento de áudio
 - **HuggingFace** - Modelos pré-treinados
-- **MFCC & GMM** - Extração de características vocais
 
 ---
 
