@@ -71,7 +71,7 @@ export const authService = {
 
   // Registro de novo usuário
   async register(userData) {
-    const response = await api.post('/users/', userData);
+    const response = await api.post('/users', userData);
     return response.data;
   },
 
@@ -96,7 +96,7 @@ export const authService = {
 export const userService = {
   // Criar novo usuário
   async createUser(userData) {
-    const response = await api.post('/users/', {
+    const response = await api.post('/users', {
       username: userData.username || userData.email,
       email: userData.email,
       password: userData.password
