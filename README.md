@@ -11,7 +11,7 @@
 
 _Revolucionando a autenticação através da biometria de voz_
 
-[🚀 Demo](#demo) • [📋 Funcionalidades](#funcionalidades) • [⚡ Início Rápido](#início-rápido) • [🛠️ Tecnologias](#tecnologias) • [📚 Documentação](#documentação)
+[🚀 Página do Projeto](#https://unb-mds.github.io/VIDAProject)
 
 </div>
 
@@ -66,6 +66,14 @@ O **VIDA** é uma plataforma inovadora de autenticação biométrica baseada em 
 - **SpeechBrain** - Biblioteca de ML para processamento de áudio
 - **PostgreSQL** - Banco de dados relacional
 
+### Frontend
+
+- **React 18** - Biblioteca para interfaces de usuário
+- **Vite** - Build tool e dev server
+- **JavaScript (ES6+)** - Linguagem principal do frontend
+- **Axios** - Cliente HTTP para API
+- **CSS3** - Estilização responsiva
+
 ### DevOps & Infraestrutura
 
 - **Docker** - Containerização
@@ -84,7 +92,9 @@ O **VIDA** é uma plataforma inovadora de autenticação biométrica baseada em 
 
 ### Pré-requisitos
 
-- Python 3.13+
+- Python 3.12
+- Node.js (v18 ou superior)
+- npm ou yarn
 - Docker & Docker Compose
 - Git
 
@@ -104,15 +114,28 @@ O **VIDA** é uma plataforma inovadora de autenticação biométrica baseada em 
    poetry install
    ```
 
-3. **Inicie os serviços**
+3. **Inicie os serviços backend**
 
    ```bash
+   cd vida_project_api
    docker-compose up -d
    ```
 
-4. **Acesse a aplicação**
+4. **Acesse a aplicação backend**
+
    - API: `http://localhost:8000`
    - Documentação: `http://localhost:8000/docs`
+
+5. **Inicie os serviços frontend**
+
+   ```bash
+   cd ../frontend
+   npm install
+   npm run dev
+   ```
+
+6. **Acesse a aplicação frontend**
+   - Frontend: `http://localhost:3000`
 
 ### 🧪 Executando Testes
 
@@ -124,10 +147,6 @@ poetry run pytest
 
 ## 📚 Documentação
 
-### 🔧 Configuração Avançada
-
-- [Configuração do Ambiente](./docs/setup.md)
-- [Documentação da API](./docs/api.md)
 - [Guia de Contribuição](./docs/contributing.md)
 
 ---
@@ -139,9 +158,9 @@ Contribuições são sempre bem-vindas! Veja nosso [Guia de Contribuição](./CO
 ### 📋 Como Contribuir
 
 1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+2. Crie uma branch para sua feature (`git checkout -b feat/AmazingFeature`)
 3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
+4. Push para a branch (`git push origin feat/AmazingFeature`)
 5. Abra um Pull Request
 
 ---
@@ -183,12 +202,6 @@ Contribuições são sempre bem-vindas! Veja nosso [Guia de Contribuição](./CO
       </a>
     </td>
     <td align="center">
-      <a href="https://github.com/EduardoRGS">
-        <img src="https://github.com/EduardoRGS.png" width="100px;" alt="Eduardo"/><br>
-        <sub><b>Eduardo</b></sub>
-      </a>
-    </td>
-    <td align="center">
       <a href="https://github.com/leticia-oliveira">
         <img src="https://github.com/leticia-oliveira.png" width="100px;" alt="Letícia"/><br>
         <sub><b>Letícia</b></sub>
@@ -209,25 +222,8 @@ Contribuições são sempre bem-vindas! Veja nosso [Guia de Contribuição](./CO
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
----
-
-## 🙏 Agradecimentos
-
-- **Universidade de Brasília (UnB)** - Apoio institucional
-- **SpeechBrain Community** - Framework de ML para áudio
-- **HuggingFace** - Modelos pré-treinados
-- **FastAPI Team** - Framework web moderno
-
----
-
-<div align="center">
-
-**[⬆ Voltar ao topo](#-vida-project)**
-
----
+## <div align="center">
 
 _Desenvolvido com ❤️ pelo Squad 13 na Universidade de Brasília_
-
-_Projeto disponível em: https://github.com/unb-mds/VIDAProject_
 
 </div>
