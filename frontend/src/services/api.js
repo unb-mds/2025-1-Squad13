@@ -1,10 +1,9 @@
 import axios from 'axios';
 
 // Configuração base da API
-const isDevelopment = import.meta.env.DEV;
-const API_BASE_URL = isDevelopment 
-  ? '/api' // Usa proxy no desenvolvimento
-  : (import.meta.env.VITE_API_URL || 'https://vida-project-api.fly.dev');
+// Em desenvolvimento: proxy do Vite (/api -> https://vida-project-api.fly.dev)
+// Em produção: rewrites do Vercel (/api -> https://vida-project-api.fly.dev)
+const API_BASE_URL = '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
