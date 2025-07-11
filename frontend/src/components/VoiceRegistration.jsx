@@ -65,7 +65,6 @@ const VoiceRegistration = ({ userEmail, onComplete, onBack }) => {
 
   const getStepInstruction = (step) => {
     return "Por favor, fale claramente: 'Olá, esta é minha voz para autenticação no sistema VIDA'"
-    return instructions[step - 1]
   }
 
   return (
@@ -106,12 +105,6 @@ const VoiceRegistration = ({ userEmail, onComplete, onBack }) => {
             </button>
           </div>
         </div>
-              {isUploading 
-                ? 'Enviando...' 
-                : currentStep === totalSteps 
-                  ? 'Concluir Registro' 
-                  : 'Próximo Passo'
-              }
       </div>
       
       {toast && (

@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/SuccessScreen.css'
 
 const SuccessScreen = ({ onNavigate, data }) => {
-  const isLogin = data.type === 'login'
+  const isLogin = data.type === 'voice-login'
   
   return (
     <main className="success-screen">
@@ -13,7 +13,7 @@ const SuccessScreen = ({ onNavigate, data }) => {
         
         <header className="success-header">
           <h1>Sucesso!</h1>
-          <p>{data.message}</p>
+          {data.message && <p>{data.message}</p>}
           {data.name && <p className="welcome-text">Bem-vindo(a), {data.name}!</p>}
           {data.email && <p className="email-text">Logado como: {data.email}</p>}
         </header>
@@ -25,28 +25,16 @@ const SuccessScreen = ({ onNavigate, data }) => {
                 className="btn btn-primary"
                 onClick={() => onNavigate('welcome')}
               >
-                Ir para Dashboard
-              </button>
-              <button 
-                className="btn btn-secondary"
-                onClick={() => onNavigate('welcome')}
-              >
-                Configurar Perfil de Voz
+                Voltar para o Início
               </button>
             </>
           ) : (
             <>
               <button 
                 className="btn btn-primary"
-                onClick={() => onNavigate('voice-registration', { email: data.email })}
+                onClick={() => onNavigate('welcome')}
               >
-                Configurar Perfil de Voz
-              </button>
-              <button 
-                className="btn btn-secondary"
-                onClick={() => onNavigate('login')}
-              >
-                Pular por Agora
+                Sair
               </button>
             </>
           )}

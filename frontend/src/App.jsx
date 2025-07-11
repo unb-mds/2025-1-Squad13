@@ -32,7 +32,7 @@ function App() {
   const handleVoiceLoginSuccess = (data) => {
     navigateToScreen('success', {
       type: 'voice-login',
-      message: 'Autenticação por voz realizada com sucesso!',
+      message: '',
       email: data.email,
       verification: data.verification
     })

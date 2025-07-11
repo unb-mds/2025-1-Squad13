@@ -290,6 +290,26 @@
   box-shadow: none !important;
 }
 
+.existing-profile-notice {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 20px 0;
+  color: #f59e0b;
+  text-align: center;
+}
+
+.existing-profile-notice p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.existing-profile-notice strong {
+  color: #fbbf24;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .voice-registration {
