@@ -88,6 +88,29 @@ O **VIDA** é uma plataforma inovadora de autenticação biométrica baseada em 
 
 ---
 
+## 📁 Arquitetura do Projeto
+
+```
+VIDAProject/
+├── docs/                          # 🌐 Landing Page
+│   ├── index.html                 # Página principal do projeto
+│   └── assets/                    # Imagens e recursos estáticos
+├── frontend/                      # 💻 Frontend React
+│   ├── src/                       # Código fonte da aplicação
+│   ├── public/                    # Arquivos públicos
+│   └── package.json               # Dependências do frontend
+├── vida_project_api/              # 🚀 Backend API
+│   ├── vida_project_api/          # Código da API FastAPI
+│   ├── migrations/                # Migrações do banco de dados
+│   ├── tests/                     # Testes automatizados
+│   └── pyproject.toml             # Dependências do backend
+└── documentation/                 # 📚 Documentações e Estudos
+    ├── meetings/                  # Atas das reuniões
+    └── studies/                   # Estudos e pesquisas realizadas
+```
+
+---
+
 ## ⚡ Início Rápido
 
 ### Pré-requisitos
