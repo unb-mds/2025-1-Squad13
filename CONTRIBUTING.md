@@ -2,6 +2,14 @@
 
 Obrigado por considerar contribuir com o projeto VIDA! Este documento contém diretrizes para contribuir com o projeto.
 
+## 🎯 Áreas que Precisam de Ajuda
+
+- **Testes**: Cobertura de testes
+- **Documentação**: Tutoriais e exemplos
+- **Performance**: Otimização do código
+- **IA**: Melhorias no modelo de reconhecimento de voz
+- **Segurança**: Segurança da API
+
 ## 📋 Como Contribuir
 
 ### 🐛 Reportando Bugs
@@ -102,7 +110,7 @@ docs: update installation instructions
 1. **Crie** uma branch descritiva:
 
    ```bash
-   git checkout -b feature/voice-authentication
+   git checkout -b feat/voice-authentication
    ```
 
 2. **Faça** suas mudanças seguindo os padrões
@@ -111,7 +119,7 @@ docs: update installation instructions
 5. **Push** para seu fork:
 
    ```bash
-   git push origin feature/voice-authentication
+   git push origin feat/voice-authentication
    ```
 
 6. **Abra** um Pull Request com:
@@ -128,24 +136,6 @@ docs: update installation instructions
 - [ ] Todos os testes passam
 - [ ] Linting passou sem erros
 - [ ] Commits seguem o padrão estabelecido
-
-## 🎯 Áreas que Precisam de Ajuda
-
-- **Frontend**: Interface web responsiva
-- **Testes**: Cobertura de testes
-- **Documentação**: Tutoriais e exemplos
-- **Performance**: Otimização de algoritmos
-- **Segurança**: Auditoria e melhorias
-
-## 📞 Precisa de Ajuda?
-
-- **Discord**: [Link do servidor]
-- **Email**: [email-do-projeto]
-- **Issues**: Para discussões técnicas
-
-## 🏆 Reconhecimento
-
-Todos os contribuidores são reconhecidos no arquivo [CONTRIBUTORS.md](./CONTRIBUTORS.md).
 
 ---
 
