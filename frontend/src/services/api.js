@@ -1,13 +1,17 @@
 import axios from 'axios';
 
 // Configuração base da API
-const API_BASE_URL = 'http://localhost:8000';
+const isDevelopment = import.meta.env.DEV;
+const API_BASE_URL = isDevelopment 
+  ? '/api' // Usa proxy no desenvolvimento
+  : (import.meta.env.VITE_API_URL || 'https://vida-project-api.fly.dev');
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 10000,
 });
 
 // Interceptor para adicionar token automaticamente
@@ -28,12 +32,29 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Tratamento de erros específicos
+    if (error.code === 'ECONNABORTED') {
+      console.error('Timeout da requisição');
+      throw new Error('Timeout da requisição. Verifique sua conexão com a internet.');
+    }
+    
     if (error.response?.status === 401) {
       // Token expirado ou inválido
       localStorage.removeItem('vida_token');
       localStorage.removeItem('vida_user');
       window.location.href = '/login';
     }
+    
+    if (error.response?.status === 500) {
+      console.error('Erro interno do servidor');
+      throw new Error('Erro interno do servidor. Tente novamente mais tarde.');
+    }
+    
+    if (!error.response) {
+      console.error('Erro de rede:', error.message);
+      throw new Error('Erro de conectividade. Verifique sua conexão com a internet.');
+    }
+    
     return Promise.reject(error);
   }
 );
@@ -176,6 +197,24 @@ export const audioUtils = {
   // Converter blob para file
   blobToFile(blob, filename) {
     return new File([blob], filename, { type: blob.type });
+  }
+};
+
+// Utilitários da API
+export const apiUtils = {
+  // Verificar se a API está funcionando
+  async checkHealth() {
+    try {
+      const response = await api.get('/health');
+      return { status: 'online', data: response.data };
+    } catch (error) {
+      return { status: 'offline', error: error.message };
+    }
+  },
+
+  // Obter URL base da API
+  getBaseUrl() {
+    return API_BASE_URL;
   }
 };
 

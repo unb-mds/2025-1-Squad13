@@ -10,7 +10,7 @@ const VoiceLogin = ({ onNavigate, onSuccess }) => {
   const [voiceBlob, setVoiceBlob] = useState(null)
   const [isVerifying, setIsVerifying] = useState(false)
   const [toast, setToast] = useState(null)
-  const [step, setStep] = useState('voice') // Start directly with voice recording
+  const [step, setStep] = useState('voice')
 
   const showToast = (message, type = 'error') => {
     setToast({ message, type })
@@ -44,7 +44,6 @@ const VoiceLogin = ({ onNavigate, onSuccess }) => {
       const result = await voiceService.verifyVoice(email, audioFile)
       
       if (result.verified) {
-        showToast('Autenticação por voz realizada com sucesso!', 'success')
         setTimeout(() => {
           if (onSuccess) {
             onSuccess({
@@ -52,17 +51,17 @@ const VoiceLogin = ({ onNavigate, onSuccess }) => {
               verification: result
             })
           }
-        }, 1500)
+        }, 500)
       } else {
         showToast(`Verificação de voz falhou. Confiança: ${(result.score * 100).toFixed(1)}%`)
-        setVoiceBlob(null) // Reset recording
+        setVoiceBlob(null)
       }
       
     } catch (error) {
       console.error('Voice verification error:', error)
       const errorMessage = error.response?.data?.detail || 'Verificação de voz falhou. Tente novamente.'
       showToast(errorMessage)
-      setVoiceBlob(null) // Reset recording
+      setVoiceBlob(null)
     } finally {
       setIsVerifying(false)
     }
